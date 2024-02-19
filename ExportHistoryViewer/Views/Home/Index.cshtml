@@ -1,0 +1,92 @@
+﻿@model ReportWithFilterModel;
+@{
+    ViewData["Title"] = "Home Page";
+	var counter = 0;
+	var paginationCounter = Model.PageCount / 10;
+}
+<div class="container mt-5">
+	<h1 class="m-4">Report</h1>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Filter</h5>
+					<form method="post" asp-action="Filter">
+						<div class="mb-3">
+							<label for="fromDate" class="form-label">From</label>
+							<input type="date" asp-for="@Model.From" class="form-control" id="fromDate">
+						</div>
+						<div class="mb-3">
+							<label for="toDate" class="form-label">To</label>
+							<input type="date" asp-for="@Model.To" class="form-control" id="toDate">
+						</div>
+						<div class="mb-3">
+							<label for="roomName" class="form-label">Room Name</label>
+							<input type="text" asp-for="@Model.RoomName" class="form-control" id="roomName">
+						</div>
+						<button type="submit" class="btn btn-primary">Filter</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-8">
+			<div class="table-responsive">
+				<table id="taskTable" class="table table-hover table-bordered table-primary">
+					<thead class="table-dark">
+					<tr>
+						<th scope="col" class="font-weight-bold">Title</th>
+						<th scope="col" class="font-weight-bold">
+							Date
+						</th>
+						<th scope="col" class="font-weight-bold">
+							Time
+						</th>
+						<th scope="col" class="font-weight-bold">
+							User Name
+						</th>
+						<th scope="col" class="font-weight-bold">
+							Room number
+						</th>
+					</tr>
+					</thead>
+					<tbody>
+					@foreach (var item in Model.Report)
+					{
+						counter++;
+						<tr>
+							<td>
+								@item.Title
+							</td>
+							<td>
+								@item.DateAndTime.ToString("d")
+							</td>	
+							<td>
+								@item.DateAndTime.ToString("HH:mm")
+							</td>
+							<td>
+								@item.UserName
+							</td>
+							<td>
+								@item.NumberOfTheRoom
+							</td>
+							
+						</tr>
+					}
+					</tbody>
+				</table>
+				<nav>
+					<ul class="pagination justify-content-center">
+						@for (int i = 0; i < paginationCounter; i++)
+						{
+							var currentPage = i + 1;
+							<li class="page-item @(i == currentPage ? "active" : "")">
+								<a class="page-link" href="@Url.Action("Index", new { pageNumber = currentPage, pageSize = 10, Model.From, Model.To, Model.RoomName })">@currentPage</a>
+							</li>
+						}
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+
+</div>
