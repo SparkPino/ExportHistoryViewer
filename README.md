@@ -3,7 +3,9 @@
 ## Project Description:
 
 This project is a web application developed using ASP.NET Core MVC framework. It serves as a platform for extracting reports of export activities from a database. The application utilizes various technologies and NuGet packages to provide robust functionality.
-./ExportHistoryViewer/wwwroot/HistoryViewer.jpg
+[/images/picture.jpg](https://github.com/SparkPino/ExportHistoryViewer/blob/main/ExportHistoryViewer/wwwroot/HistoryViewer.jpg)
+
+ 
 ## Functionality:
 
 * Data Retrieval: The application retrieves reports of export activities from the underlying database.
